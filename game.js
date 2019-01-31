@@ -32,11 +32,15 @@ $(document).ready(() => {
     setTimeout(() => {
       console.log(randomChosenColor);
       console.log(gamePattern);
-      $("#" + randomChosenColor)
-        .fadeIn(100)
-        .fadeOut(100)
-        .fadeIn(100);
-      playSound(randomChosenColor);
+      for (let i = 0; i < gamePattern.length; i++) {
+        setTimeout(() => {
+          $("#" + gamePattern[i])
+            .fadeIn(100)
+            .fadeOut(100)
+            .fadeIn(100);
+          playSound(gamePattern[i]);
+        }, i * 300);
+      }
     }, 400);
   };
 
