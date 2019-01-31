@@ -80,6 +80,7 @@ $(document).ready(() => {
 
       if (samePattern(userClickedPattern, gamePattern)) {
         nextSequence();
+        // if the userClickedPattern is the same length as gamePattern
       } else if (userClickedPattern.length === gamePattern.length) {
         setTimeout(() => {
           alert("womp womp");
