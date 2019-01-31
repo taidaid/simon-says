@@ -57,23 +57,25 @@ $(document).ready(() => {
       userClickedPattern.push(userClickedColor);
       animatePress(userClickedColor);
       // when i click a button, compare the clicked button to the the gamePattern
-      console.log(userClickedPattern);
-      console.log(gamePattern);
+
       // compare the two arrays and if equal, nextSequence(), else continue to allow clicks to push to userClickedPattern until its length equals
       //gamePattern.length
       const samePattern = (userClickedPattern, gamePattern) => {
-        userClickedPattern.forEach(v1 => {
-          gamePattern.forEach(v2 => {
-            v1 === v2;
-          });
-        });
+        for (var i = 0, l = gamePattern.length; i < l; i++) {
+          if (userClickedPattern[i] != gamePattern[i]) {
+            return false;
+          }
+        }
+        return true;
       };
-      console.log(samePattern);
-      if (samePattern) {
+
+      if (samePattern(userClickedPattern, gamePattern)) {
         nextSequence();
       } else if (userClickedPattern.length === gamePattern.length) {
-        alert("womp womp");
-        newGame();
+        setTimeout(() => {
+          alert("womp womp");
+          newGame();
+        }, 300);
       }
     }
   });
