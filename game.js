@@ -30,8 +30,13 @@ $(document).ready(() => {
     $("h1").text(`Level ${level}`);
     userClickedPattern.splice(0, userClickedPattern.length);
     setTimeout(() => {
+      console.log(randomChosenColor);
+      console.log(gamePattern);
+      $("#" + randomChosenColor)
+        .fadeIn(100)
+        .fadeOut(100)
+        .fadeIn(100);
       playSound(randomChosenColor);
-      animatePress(randomChosenColor);
     }, 400);
   };
 
