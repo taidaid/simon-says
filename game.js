@@ -10,8 +10,8 @@ $(document).ready(() => {
   };
 
   // plays a sound file based on color input
-  const playSound = color => {
-    return new Audio(`./sounds/${color}.mp3`).play();
+  const playSound = sound => {
+    return new Audio(`./sounds/${sound}.mp3`).play();
   };
 
   // animates button with add and removing 'pressed' class
@@ -48,7 +48,7 @@ $(document).ready(() => {
   const newGame = () => {
     if (level === 0) {
       nextSequence();
-    } else if (confirm("New game?")) {
+    } else {
       level = 0;
       gamePattern.splice(0, gamePattern.length);
       userClickedPattern.splice(0, userClickedPattern.length);
@@ -70,22 +70,30 @@ $(document).ready(() => {
       // compare the two arrays and if equal, nextSequence(), else continue to allow clicks to push to userClickedPattern until its length equals
       //gamePattern.length
       const samePattern = (userClickedPattern, gamePattern) => {
-        for (var i = 0, l = gamePattern.length; i < l; i++) {
-          if (userClickedPattern[i] != gamePattern[i]) {
+        for (var i = 0, l = userClickedPattern.length; i < l; i++) {
+          if (userClickedPattern[i] !== gamePattern[i]) {
             return false;
           }
         }
         return true;
       };
 
-      if (samePattern(userClickedPattern, gamePattern)) {
+      if (
+        samePattern(userClickedPattern, gamePattern) &&
+        userClickedPattern.length === gamePattern.length
+      ) {
         nextSequence();
-        // if the userClickedPattern is the same length as gamePattern
-      } else if (userClickedPattern.length === gamePattern.length) {
+        // if the userClickedPattern is the same length as gamePattern then guessing is done and can be evaluated
+      } else if (!samePattern(userClickedPattern, gamePattern)) {
+        console.log(userClickedPattern);
+        console.log(gamePattern);
+        $(`body`).addClass("game-over");
+        $("h1").text("Game Over");
+        playSound("wrong");
         setTimeout(() => {
-          alert("womp womp");
+          $(`body`).removeClass("game-over");
           newGame();
-        }, 300);
+        }, 900);
       }
     }
   });
