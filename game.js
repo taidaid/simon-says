@@ -30,8 +30,6 @@ $(document).ready(() => {
     $("h1").text(`Level ${level}`);
     userClickedPattern.splice(0, userClickedPattern.length);
     setTimeout(() => {
-      console.log(randomChosenColor);
-      console.log(gamePattern);
       for (let i = 0; i < gamePattern.length; i++) {
         setTimeout(() => {
           $("#" + gamePattern[i])
@@ -85,8 +83,6 @@ $(document).ready(() => {
         nextSequence();
         // if the userClickedPattern is the same length as gamePattern then guessing is done and can be evaluated
       } else if (!samePattern(userClickedPattern, gamePattern)) {
-        console.log(userClickedPattern);
-        console.log(gamePattern);
         $(`body`).addClass("game-over");
         $("h1").text("Game Over");
         playSound("wrong");
